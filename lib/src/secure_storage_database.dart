@@ -2,6 +2,30 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ds_easy_db/ds_easy_db.dart';
 
+/// FlutterSecureStorage implementation of [DatabaseRepository].
+///
+/// Provides encrypted, platform-native secure storage for sensitive data.
+/// Uses Keychain on iOS/macOS and KeyStore on Android with AES encryption.
+///
+/// Features:
+/// - Platform-native encryption
+/// - Secure storage for tokens, passwords, and API keys
+/// - Cross-platform support
+/// - Zero configuration
+///
+/// Perfect for:
+/// - Authentication tokens
+/// - API keys and secrets
+/// - User credentials
+/// - Sensitive settings
+///
+/// Example:
+/// ```dart
+/// db.configure(
+///   secure: SecureStorageDatabase(),
+///   // ...
+/// );
+/// ```
 class SecureStorageDatabase implements DatabaseRepository {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 

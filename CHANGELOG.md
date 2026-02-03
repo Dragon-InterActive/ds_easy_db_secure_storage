@@ -1,3 +1,13 @@
+## 2.0.0
+
+* **Breaking Change**: Added WASM compatibility with platform-specific implementations
+* **Web**: Now uses in-memory encrypted storage (session-based, data lost on reload)
+* **Mobile/Desktop**: Still uses platform-native secure storage (Keychain/Keystore)
+* Added `cryptography` package for web encryption
+* Updated to ds_easy_db ^1.0.2
+* Updated to flutter_secure_storage ^10.0.0
+* Note: Web implementation does not persist data between sessions
+
 ## 1.0.1
 
 * Added dartdoc comments to public API

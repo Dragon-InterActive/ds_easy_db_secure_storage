@@ -62,8 +62,8 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  ds_easy_db: ^1.0.2
-  ds_easy_db_secure_storage: ^2.0.0
+  ds_easy_db: ^1.1.1
+  ds_easy_db_secure_storage: ^2.1.0
 ```
 
 ### Platform-Specific Setup
@@ -140,32 +140,32 @@ class EasyDBConfig {
 
 ```dart
 // Store auth token securely
-await db.secure.set('auth', 'token', {
+await db.secure!.set('auth', 'token', {
   'accessToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
   'refreshToken': 'abc123xyz...',
   'expiresAt': DateTime.now().add(Duration(hours: 1)).toIso8601String(),
 });
 
 // Retrieve token
-final authData = await db.secure.get('auth', 'token');
+final authData = await db.secure!.get('auth', 'token');
 print('Access Token: ${authData?['accessToken']}');
 
 // Delete on logout
-await db.secure.delete('auth', 'token');
+await db.secure!.delete('auth', 'token');
 ```
 
 ### Store API Keys
 
 ```dart
 // Store API credentials
-await db.secure.set('api', 'credentials', {
+await db.secure!.set('api', 'credentials', {
   'apiKey': 'sk_live_abc123...',
   'apiSecret': 'secret_xyz789...',
   'environment': 'production',
 });
 
 // Read credentials
-final credentials = await db.secure.get('api', 'credentials');
+final credentials = await db.secure!.get('api', 'credentials');
 final apiKey = credentials?['apiKey'];
 ```
 
@@ -173,15 +173,15 @@ final apiKey = credentials?['apiKey'];
 
 ```dart
 // Store encrypted user credentials
-await db.secure.set('user', 'credentials', {
+await db.secure!.set('user', 'credentials', {
   'email': 'user@example.com',
   'encryptedPassword': 'hashed_password_here',
   'biometricEnabled': true,
 });
 
 // Check if credentials exist
-if (await db.secure.exists('user', 'credentials')) {
-  final creds = await db.secure.get('user', 'credentials');
+if (await db.secure!.exists('user', 'credentials')) {
+  final creds = await db.secure!.get('user', 'credentials');
   print('Email: ${creds?['email']}');
 }
 ```
@@ -190,14 +190,14 @@ if (await db.secure.exists('user', 'credentials')) {
 
 ```dart
 // Store cryptographic keys
-await db.secure.set('crypto', 'keys', {
+await db.secure!.set('crypto', 'keys', {
   'privateKey': '-----BEGIN PRIVATE KEY-----\n...',
   'publicKey': '-----BEGIN PUBLIC KEY-----\n...',
   'keyPairId': 'keypair_123',
 });
 
 // Retrieve for signing
-final keys = await db.secure.get('crypto', 'keys');
+final keys = await db.secure!.get('crypto', 'keys');
 final privateKey = keys?['privateKey'];
 ```
 
@@ -205,15 +205,15 @@ final privateKey = keys?['privateKey'];
 
 ```dart
 // Store multiple secure items
-await db.secure.set('tokens', 'service1', {'token': 'abc', 'service': 'api1'});
-await db.secure.set('tokens', 'service2', {'token': 'xyz', 'service': 'api2'});
+await db.secure!.set('tokens', 'service1', {'token': 'abc', 'service': 'api1'});
+await db.secure!.set('tokens', 'service2', {'token': 'xyz', 'service': 'api2'});
 
 // Query all tokens
-final allTokens = await db.secure.getAll('tokens');
+final allTokens = await db.secure!.getAll('tokens');
 print('Total tokens: ${allTokens?.length}');
 
 // Query specific service
-final tokens = await db.secure.query('tokens', 
+final tokens = await db.secure!.query('tokens', 
   where: {'service': 'api1'}
 );
 ```
@@ -222,15 +222,15 @@ final tokens = await db.secure.query('tokens',
 
 ```dart
 // Delete all sensitive data
-await db.secure.delete('auth', 'token');
-await db.secure.delete('user', 'credentials');
-await db.secure.delete('api', 'credentials');
+await db.secure!.delete('auth', 'token');
+await db.secure!.delete('user', 'credentials');
+await db.secure!.delete('api', 'credentials');
 
 // Or query and delete all in collection
-final allAuth = await db.secure.getAll('auth');
+final allAuth = await db.secure!.getAll('auth');
 if (allAuth != null) {
   for (var key in allAuth.keys) {
-    await db.secure.delete('auth', key);
+    await db.secure!.delete('auth', key);
   }
 }
 ```
@@ -246,7 +246,7 @@ Future<void> storeToken(String token) async {
     print('Warning: Token will be lost on page reload');
   }
   
-  await db.secure.set('auth', 'token', {
+  await db.secure!.set('auth', 'token', {
     'token': token,
     'savedAt': DateTime.now().toIso8601String(),
   });
@@ -296,7 +296,7 @@ Future<void> storeToken(String token) async {
 // Data will be lost on reload - re-authenticate on app start
 if (kIsWeb) {
   // Force user to re-login on page load
-  final token = await db.secure.get('auth', 'token');
+  final token = await db.secure!.get('auth', 'token');
   if (token == null) {
     navigateToLogin();
   }

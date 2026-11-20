@@ -1,3 +1,13 @@
+## 2.1.0
+
+* Fixed: using the database before `init()` threw a `LateInitializationError`
+  (mobile and web).
+* Fixed: `DatabaseRepository.serverTS` was stored as the literal placeholder;
+  it and other `DateTime` values are stored as ISO-8601 strings now.
+* `query` results include the document id as `id` on every platform
+  (a document's own `id` field is kept).
+* Malformed stored values are skipped instead of throwing.
+
 ## 2.0.0
 
 * **Breaking Change**: Added WASM compatibility with platform-specific implementations

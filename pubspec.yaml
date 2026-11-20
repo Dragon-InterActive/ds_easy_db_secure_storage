@@ -1,6 +1,6 @@
 name: ds_easy_db_secure_storage
 description: "FlutterSecureStorage implementation for DS-EasyDB. Provides encrypted storage for sensitive data using platform-native security."
-version: 2.0.0
+version: 2.1.0
 homepage: https://github.com/Dragon-InterActive/ds_easy_db_secure_storage
 license: BSD-3-Clause
 

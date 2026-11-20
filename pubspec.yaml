@@ -1,18 +1,18 @@
 name: ds_easy_db_secure_storage
 description: "FlutterSecureStorage implementation for DS-EasyDB. Provides encrypted storage for sensitive data using platform-native security."
-version: 2.0.0
+version: 2.1.0
 homepage: https://github.com/Dragon-InterActive/ds_easy_db_secure_storage
 license: BSD-3-Clause
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.35.1'
+  flutter: '>=3.44.9'
 
 dependencies:
   flutter:
     sdk: flutter
-  ds_easy_db: ^1.0.2
-  flutter_secure_storage: ^10.0.0
+  ds_easy_db: ^1.1.1
+  flutter_secure_storage: ^11.2.0
   cryptography: ^2.9.0
 
 dev_dependencies:
